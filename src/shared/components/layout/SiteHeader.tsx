@@ -1,8 +1,9 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { mainNavItems } from "@/shared/config/site";
 import { BellIcon, CartIcon, UserIcon } from "@/shared/components/icons";
 import { Container } from "./Container";
-import { MainNav } from "./MainNav";
+import { MainNav, MainNavFallback } from "./MainNav";
 import { IconBadgeButton } from "./IconBadgeButton";
 
 export function SiteHeader() {
@@ -16,7 +17,10 @@ export function SiteHeader() {
           HIDDEN KICE
         </Link>
 
-        <MainNav items={mainNavItems} variant="desktop" />
+        {/* usePathname 은 동적 라우트(/textbooks/[id])에서 요청 시점에 결정되므로 Suspense 로 감싼다. */}
+        <Suspense fallback={<MainNavFallback items={mainNavItems} variant="desktop" />}>
+          <MainNav items={mainNavItems} variant="desktop" />
+        </Suspense>
 
         <div className="ml-auto flex shrink-0 items-center gap-3 text-gray-700 md:gap-[19px]">
           <IconBadgeButton href="/cart" label="장바구니" count={1} icon={<CartIcon className="size-[26px]" />} />
@@ -24,7 +28,9 @@ export function SiteHeader() {
           <IconBadgeButton href="/mypage" label="마이페이지" icon={<UserIcon className="size-[26px]" />} />
         </div>
       </Container>
-      <MainNav items={mainNavItems} variant="mobile" />
+      <Suspense fallback={<MainNavFallback items={mainNavItems} variant="mobile" />}>
+        <MainNav items={mainNavItems} variant="mobile" />
+      </Suspense>
     </header>
   );
 }

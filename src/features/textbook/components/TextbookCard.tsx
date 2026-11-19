@@ -13,7 +13,7 @@ export function TextbookCard({ textbook, preloadImage }: TextbookCardProps) {
   return (
     <article className="min-w-0">
       <Link
-        href={`/textbooks?id=${textbook.id}`}
+        href={`/textbooks/${textbook.id}`}
         className="group block rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
       >
         <div className="relative aspect-[250/318] overflow-hidden rounded border border-gray-200 bg-white">

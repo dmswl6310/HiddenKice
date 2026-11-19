@@ -2,6 +2,8 @@ export const siteConfig = {
   name: "히든카이스",
   title: "HIDDEN KICE | 히든카이스 스토어",
   description: "상위권이 선택한 문제집, 결과로 증명된 실전 대비서 히든카이스",
+  url: "https://hidden-kice-shop.vercel.app",
+  ogImage: "/images/banner/hero-books.png",
 } as const;
 
 export type NavItem = {

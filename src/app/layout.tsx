@@ -14,8 +14,18 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: siteConfig.title,
   description: siteConfig.description,
+  // 메신저/메일에 링크를 공유했을 때 보이는 미리보기
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    siteName: siteConfig.name,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [{ url: siteConfig.ogImage, width: 800, height: 491, alt: "히든카이스 교재" }],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

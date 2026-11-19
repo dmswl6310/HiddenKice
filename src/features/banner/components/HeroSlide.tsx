@@ -2,15 +2,18 @@ import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon } from "@/shared/components/icons";
+import { cn } from "@/shared/lib/utils/cn";
 import type { BannerSlide } from "../model/types";
 import { BannerFeatureIcon } from "./BannerFeatureIcon";
 
 type HeroSlideProps = {
   slide: BannerSlide;
   isFirst: boolean;
+  /** 현재 보이는 슬라이드인지. 전환될 때 문구/이미지 등장 효과에 사용한다. */
+  active: boolean;
 };
 
-export function HeroSlide({ slide, isFirst }: HeroSlideProps) {
+export function HeroSlide({ slide, isFirst, active }: HeroSlideProps) {
   return (
     <div
       className="relative mx-auto h-full max-w-[1440px]"
@@ -23,10 +26,20 @@ export function HeroSlide({ slide, isFirst }: HeroSlideProps) {
         height={slide.image.height}
         preload={isFirst}
         sizes="(min-width: 768px) 800px, 100vw"
-        className="pointer-events-none absolute right-0 top-0 h-full w-auto max-w-none select-none object-cover opacity-40 [mask-image:linear-gradient(to_right,transparent,black_18%)] xl:opacity-100"
+        className={cn(
+          "pointer-events-none absolute right-0 top-0 h-full w-auto max-w-none origin-right select-none object-cover opacity-40 [mask-image:linear-gradient(to_right,transparent,black_18%)] xl:opacity-100",
+          "transition-transform duration-[1600ms] ease-out motion-reduce:transform-none motion-reduce:transition-none",
+          active ? "scale-100" : "scale-105",
+        )}
       />
 
-      <div className="relative flex h-full flex-col justify-center px-5 md:block md:px-10 md:pt-[78px] xl:pl-[90px]">
+      <div
+        className={cn(
+          "relative flex h-full flex-col justify-center px-5 md:block md:px-10 md:pt-[78px] xl:pl-[90px]",
+          "transition-[opacity,translate] duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:transition-none",
+          active ? "translate-y-0 opacity-100 delay-200" : "translate-y-5 opacity-0",
+        )}
+      >
         <p className="flex items-center gap-2 text-sm font-medium tracking-[0.25em] text-(--slide-accent) md:text-lg">
           {slide.eyebrow}
           <span aria-hidden="true" className="inline-block h-px w-3.5 bg-(--slide-accent)" />

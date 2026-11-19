@@ -47,7 +47,7 @@ export function HeroBanner({ slides = heroSlides }: HeroBannerProps) {
               active ? "opacity-100" : "opacity-0",
             )}
           >
-            <HeroSlide slide={slide} isFirst={slideIndex === 0} />
+            <HeroSlide slide={slide} isFirst={slideIndex === 0} active={active} />
           </div>
         );
       })}

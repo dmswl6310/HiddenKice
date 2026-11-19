@@ -5,8 +5,10 @@ import { usePathname } from "next/navigation";
 import type { NavItem } from "@/shared/config/site";
 import { cn } from "@/shared/lib/utils/cn";
 
+/** 스토어("/")는 교재 상세(/textbooks) 같은 하위 화면에서도 선택 상태로 표시한다. */
 function isActive(pathname: string, href: string) {
-  return href === "/" ? pathname === "/" : pathname.startsWith(href);
+  if (href === "/") return pathname === "/" || pathname.startsWith("/textbooks");
+  return pathname.startsWith(href);
 }
 
 type MainNavProps = {

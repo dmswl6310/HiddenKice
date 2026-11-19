@@ -12,6 +12,7 @@
 | 스타일 | Tailwind CSS v4, Pretendard |
 | 데이터 | Supabase (PostgreSQL, RLS), supabase-js |
 | 서버 상태 관리 | TanStack Query v5 |
+| 테스트 | Vitest |
 | 배포 | Vercel |
 
 ## 주요 기능
@@ -72,6 +73,7 @@ Supabase SQL Editor 에서 `supabase/migrations/*.sql`, `supabase/seed.sql` 순�
 | `npm run build` | 프로덕션 빌드 |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | 타입 검사 |
+| `npm test` | 단위 테스트 (Vitest) |
 
 ## 브랜치 / 커밋 규칙
 

@@ -4,7 +4,7 @@ import { cn } from "@/shared/lib/utils/cn";
 import { heroSlides } from "../model/slides";
 import type { BannerSlide } from "../model/types";
 import { useAutoSlide } from "../hooks/useAutoSlide";
-import { useSwipe } from "../hooks/useSwipe";
+import { useSwipe } from "@/shared/hooks/useSwipe";
 import { HeroSlide } from "./HeroSlide";
 
 type HeroBannerProps = {

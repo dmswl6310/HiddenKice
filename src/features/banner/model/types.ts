@@ -8,6 +8,8 @@ export type BannerFeature = {
 
 export type BannerSlide = {
   id: string;
+  /** 슬라이드 포인트 컬러 (eyebrow, 아이콘, CTA) */
+  accent: string;
   eyebrow: string;
   title: string;
   subtitle: string;

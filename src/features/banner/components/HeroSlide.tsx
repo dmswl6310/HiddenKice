@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon } from "@/shared/components/icons";
@@ -11,7 +12,10 @@ type HeroSlideProps = {
 
 export function HeroSlide({ slide, isFirst }: HeroSlideProps) {
   return (
-    <div className="relative mx-auto h-full max-w-[1440px]">
+    <div
+      className="relative mx-auto h-full max-w-[1440px]"
+      style={{ "--slide-accent": slide.accent } as CSSProperties}
+    >
       <Image
         src={slide.image.src}
         alt={slide.image.alt}
@@ -23,9 +27,9 @@ export function HeroSlide({ slide, isFirst }: HeroSlideProps) {
       />
 
       <div className="relative flex h-full flex-col justify-center px-5 md:block md:px-10 md:pt-[78px] xl:pl-[90px]">
-        <p className="flex items-center gap-2 text-sm font-medium tracking-[0.25em] text-accent md:text-lg">
+        <p className="flex items-center gap-2 text-sm font-medium tracking-[0.25em] text-(--slide-accent) md:text-lg">
           {slide.eyebrow}
-          <span aria-hidden="true" className="inline-block h-px w-3.5 bg-accent" />
+          <span aria-hidden="true" className="inline-block h-px w-3.5 bg-(--slide-accent)" />
         </p>
         <h2 className="mt-3 text-[34px] font-bold leading-[1.2] tracking-[-0.03em] text-white md:mt-[14px] md:text-[60px]">
           {slide.title}
@@ -39,9 +43,9 @@ export function HeroSlide({ slide, isFirst }: HeroSlideProps) {
           {slide.features.map((feature, index) => (
             <li key={feature.title} className="flex items-center">
               {index > 0 && <span aria-hidden="true" className="mx-5 h-[30px] w-px bg-white/25" />}
-              <BannerFeatureIcon name={feature.icon} className="size-8 shrink-0 text-accent" />
+              <BannerFeatureIcon name={feature.icon} className="size-8 shrink-0 text-(--slide-accent)" />
               <div className="ml-3">
-                <p className="text-sm font-bold leading-[1.3] text-accent">{feature.title}</p>
+                <p className="text-sm font-bold leading-[1.3] text-(--slide-accent)">{feature.title}</p>
                 <p className="mt-0.5 text-xs leading-[1.3] text-white/85">{feature.description}</p>
               </div>
             </li>
@@ -50,7 +54,7 @@ export function HeroSlide({ slide, isFirst }: HeroSlideProps) {
 
         <Link
           href={slide.cta.href}
-          className="mt-8 inline-flex h-[42px] w-full max-w-[216px] items-center justify-between rounded border border-accent px-[26px] text-[13px] font-semibold text-accent transition-colors hover:bg-accent hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:mt-[30px]"
+          className="mt-8 inline-flex h-[42px] w-full max-w-[216px] items-center justify-between rounded border border-(--slide-accent) px-[26px] text-[13px] font-semibold text-(--slide-accent) transition-colors hover:bg-(--slide-accent) hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--slide-accent) md:mt-[30px]"
         >
           {slide.cta.label}
           <ArrowRightIcon className="size-4" />

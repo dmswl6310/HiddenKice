@@ -23,7 +23,7 @@ export function HeroSlide({ slide, isFirst }: HeroSlideProps) {
         height={slide.image.height}
         preload={isFirst}
         sizes="(min-width: 768px) 800px, 100vw"
-        className="pointer-events-none absolute right-0 top-0 h-full w-auto max-w-none select-none object-cover opacity-40 [mask-image:linear-gradient(to_right,transparent,black_18%)] md:opacity-100"
+        className="pointer-events-none absolute right-0 top-0 h-full w-auto max-w-none select-none object-cover opacity-40 [mask-image:linear-gradient(to_right,transparent,black_18%)] xl:opacity-100"
       />
 
       <div className="relative flex h-full flex-col justify-center px-5 md:block md:px-10 md:pt-[78px] xl:pl-[90px]">

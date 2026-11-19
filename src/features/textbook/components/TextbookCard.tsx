@@ -15,7 +15,7 @@ export function TextbookCard({ textbook, preloadImage }: TextbookCardProps) {
         <TextbookThumbnail src={textbook.thumbnailUrl} alt={textbook.title} preload={preloadImage} />
       </div>
       <p className="mt-3 text-base text-gray-500">{TEXTBOOK_CATEGORY_LABEL[textbook.category]}</p>
-      <h3 className="mt-1 truncate text-base font-semibold text-gray-900" title={textbook.title}>
+      <h3 className="mt-1 line-clamp-2 min-h-[2lh] text-base font-semibold text-gray-900" title={textbook.title}>
         {textbook.title}
       </h3>
       <TextbookPrice price={textbook.price} salePrice={textbook.salePrice} />

@@ -23,11 +23,11 @@ export function MainNav({ items, variant = "desktop" }: MainNavProps) {
       aria-label="주요 메뉴"
       className={cn(
         variant === "desktop"
-          ? "hidden md:ml-[60px] md:block lg:ml-[74px]"
-          : "overflow-x-auto px-5 pb-3 [scrollbar-width:none] md:hidden",
+          ? "hidden lg:ml-[74px] lg:block"
+          : "overflow-x-auto px-5 pb-3 [scrollbar-width:none] lg:hidden",
       )}
     >
-      <ul className={cn("flex items-center", variant === "desktop" ? "gap-8" : "gap-5 whitespace-nowrap")}>
+      <ul className={cn("flex items-center", variant === "desktop" ? "gap-8 whitespace-nowrap" : "gap-5 whitespace-nowrap md:gap-8")}>
         {items.map((item) => {
           const active = isActive(pathname, item.href);
           return (
@@ -36,7 +36,7 @@ export function MainNav({ items, variant = "desktop" }: MainNavProps) {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  variant === "desktop" ? "text-base lg:text-lg" : "text-sm",
+                  variant === "desktop" ? "text-lg" : "text-sm md:text-base",
                   "font-medium tracking-[-0.02em] transition-colors hover:text-primary",
                   active ? "text-primary" : "text-gray-500",
                 )}

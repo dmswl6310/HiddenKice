@@ -53,6 +53,7 @@ export function HeroSlide({ slide, isFirst }: HeroSlideProps) {
         </ul>
 
         <Link
+          draggable={false}
           href={slide.cta.href}
           className="mt-8 inline-flex h-[42px] w-full max-w-[216px] items-center justify-between rounded border border-(--slide-accent) px-[26px] text-[13px] font-semibold text-(--slide-accent) transition-colors hover:bg-(--slide-accent) hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--slide-accent) md:mt-[30px]"
         >

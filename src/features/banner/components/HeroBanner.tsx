@@ -4,6 +4,7 @@ import { cn } from "@/shared/lib/utils/cn";
 import { heroSlides } from "../model/slides";
 import type { BannerSlide } from "../model/types";
 import { useAutoSlide } from "../hooks/useAutoSlide";
+import { useSwipe } from "../hooks/useSwipe";
 import { HeroSlide } from "./HeroSlide";
 
 type HeroBannerProps = {
@@ -12,6 +13,7 @@ type HeroBannerProps = {
 
 export function HeroBanner({ slides = heroSlides }: HeroBannerProps) {
   const { index, pause, resume, next, prev } = useAutoSlide({ length: slides.length });
+  const swipeHandlers = useSwipe({ onSwipeLeft: next, onSwipeRight: prev });
 
   if (slides.length === 0) return null;
 
@@ -19,7 +21,8 @@ export function HeroBanner({ slides = heroSlides }: HeroBannerProps) {
     <section
       aria-roledescription="carousel"
       aria-label="메인 배너"
-      className="relative h-[360px] overflow-hidden bg-[linear-gradient(90deg,#0a0a0b_0%,#121214_45%,#1a191b_100%)] md:h-[490px]"
+      className="relative h-[360px] touch-pan-y select-none overflow-hidden bg-[linear-gradient(90deg,#0a0a0b_0%,#121214_45%,#1a191b_100%)] md:h-[490px]"
+      {...(slides.length > 1 ? swipeHandlers : {})}
       onMouseEnter={pause}
       onMouseLeave={resume}
       onFocus={pause}

@@ -46,6 +46,7 @@ export function useAutoSlide({ length, intervalMs = 5000 }: UseAutoSlideOptions)
     [length],
   );
 
+  // index가 바뀌면(스와이프 등 수동 전환 포함) 타이머를 처음부터 다시 시작한다.
   useEffect(() => {
     if (!canSlide || paused || reducedMotion) return;
 
@@ -53,7 +54,7 @@ export function useAutoSlide({ length, intervalMs = 5000 }: UseAutoSlideOptions)
       if (document.visibilityState === "visible") next();
     }, intervalMs);
     return () => window.clearInterval(timer);
-  }, [canSlide, paused, reducedMotion, intervalMs, next]);
+  }, [canSlide, paused, reducedMotion, intervalMs, next, index]);
 
   return {
     index: length > 0 ? Math.min(index, length - 1) : 0,

@@ -1,4 +1,7 @@
-export const TEXTBOOK_CATEGORIES = ["pass", "single"] as const;
+import { Constants, type Tables } from "@/shared/lib/supabase/database.types";
+
+/** DB enum(textbook_category)에서 가져와, 스키마가 바뀌면 타입 검사에서 바로 드러나게 한다. */
+export const TEXTBOOK_CATEGORIES = Constants.public.Enums.textbook_category;
 
 export type TextbookCategory = (typeof TEXTBOOK_CATEGORIES)[number];
 
@@ -14,15 +17,11 @@ export type Textbook = {
   thumbnailUrl: string | null;
 };
 
-/** Supabase textbooks 테이블 row (snake_case) */
-export type TextbookRow = {
-  id: number;
-  title: string;
-  category: string;
-  price: number;
-  sale_price: number;
-  thumbnail_url: string | null;
-};
+/** 목록 조회에서 가져오는 textbooks 컬럼 (Supabase 생성 타입 기반, snake_case) */
+export type TextbookRow = Pick<
+  Tables<"textbooks">,
+  "id" | "title" | "category" | "price" | "sale_price" | "thumbnail_url"
+>;
 
 export type TextbookCategoryFilter = TextbookCategory | "all";
 

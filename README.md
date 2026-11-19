@@ -74,6 +74,7 @@ Supabase SQL Editor 에서 `supabase/migrations/*.sql`, `supabase/seed.sql` 순�
 | `npm run lint` | ESLint |
 | `npm run typecheck` | 타입 검사 |
 | `npm test` | 단위 테스트 (Vitest) |
+| `npm run db:types` | Supabase 스키마로 DB 타입 재생성 (`SUPABASE_PROJECT_ID` 필요) |
 
 ## 브랜치 / 커밋 규칙
 

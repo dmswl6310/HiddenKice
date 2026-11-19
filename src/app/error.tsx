@@ -1,8 +1,14 @@
 "use client";
 
+import { useEffect } from "react";
 import { Container } from "@/shared/components/layout/Container";
 
-export default function Error({ retry }: { error: unknown; retry: () => void }) {
+export default function Error({ error, retry }: { error: unknown; retry: () => void }) {
+  useEffect(() => {
+    // 운영에서는 Sentry 같은 에러 수집 도구로 보내는 지점
+    console.error(error);
+  }, [error]);
+
   return (
     <Container className="flex min-h-[50vh] flex-col items-center justify-center py-24 text-center">
       <h1 className="text-2xl font-bold text-gray-900">일시적인 오류가 발생했습니다.</h1>

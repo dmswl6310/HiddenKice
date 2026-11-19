@@ -21,13 +21,6 @@ export function useAutoSlide({ length, intervalMs = 5000 }: UseAutoSlideOptions)
   const reducedMotion = usePrefersReducedMotion();
   const canSlide = length > 1;
 
-  const goTo = useCallback(
-    (next: number) => {
-      if (length <= 0) return;
-      setIndex(((next % length) + length) % length);
-    },
-    [length],
-  );
   const next = useCallback(() => setIndex((i) => (length > 0 ? (i + 1) % length : 0)), [length]);
   const prev = useCallback(
     () => setIndex((i) => (length > 0 ? (i - 1 + length) % length : 0)),
@@ -46,7 +39,6 @@ export function useAutoSlide({ length, intervalMs = 5000 }: UseAutoSlideOptions)
 
   return {
     index: length > 0 ? Math.min(index, length - 1) : 0,
-    goTo,
     next,
     prev,
     pause: () => setPaused(true),

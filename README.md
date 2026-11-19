@@ -1,5 +1,7 @@
 # HIDDEN KICE 스토어
 
+[![CI](https://github.com/dmswl6310/HiddenKice/actions/workflows/ci.yml/badge.svg)](https://github.com/dmswl6310/HiddenKice/actions/workflows/ci.yml)
+
 히든카이스 교재 스토어 메인 화면입니다. 교재 정보는 Supabase 에 저장하고, 브라우저에서 직접 조회(CSR)해 보여줍니다.
 
 - **배포**: https://hidden-kice-shop.vercel.app
@@ -17,8 +19,8 @@
 
 ## 주요 기능
 
-- **메인 배너**: 5장 자동 전환 슬라이더, 마우스 드래그/터치 스와이프 전환, 슬라이드 버튼으로 해당 필터 목록 이동 (마우스를 올리거나 탭이 비활성일 때, 동작 줄이기 설정 시 정지)
-- **교재 목록**: 검색, 구분 필터(전체/패스/단품), 페이지네이션(12개씩)
+- **메인 배너**: 5장 자동 전환 슬라이더. 이전/다음/정지 버튼, 마우스 드래그·터치 스와이프로 조작하고, 슬라이드 버튼으로 해당 필터 목록으로 이동 (마우스를 올리거나 탭이 비활성일 때, 동작 줄이기 설정 시 자동 전환 정지)
+- **교재 목록**: 검색, 구분 필터(전체/패스/단품), 페이지네이션(12개씩), 카드 클릭 시 상세 경로(`/textbooks/[id]`, 준비 중)로 이동
 - **URL 상태 관리**: 검색어/구분/페이지가 URL 에 남아 새로고침, 링크 공유, 뒤로가기 시에도 유지
 - **예외 처리**: 로딩 스켈레톤, 조회 실패 시 다시 시도, 검색 결과 없음 안내, 이미지 로드 실패 대체 UI, 잘못된 URL 값 보정
 - **반응형**: 모바일 2열 / 태블릿 3열 / 데스크톱 4열, 1024px 미만은 가로 스크롤 메뉴
@@ -31,10 +33,10 @@ src/
 ├── app/                    # 라우팅. 페이지는 feature 컴포넌트를 조립만 한다
 │   ├── layout.tsx
 │   ├── page.tsx            # 스토어 메인 = 배너 + 교재 목록
-│   └── (coming-soon)/      # 아직 구현하지 않은 메뉴
+│   └── (coming-soon)/      # 아직 구현하지 않은 메뉴, 교재 상세(/textbooks/[id])
 │
 ├── features/               # 기능(도메인) 단위 모듈
-│   ├── banner/
+│   ├── banner/             # components, hooks, model (슬라이드 데이터)
 │   └── textbook/
 │       ├── api/            # 데이터 조회 (Supabase)
 │       ├── hooks/          # 서버 상태(TanStack Query), URL 상태
@@ -45,8 +47,8 @@ src/
 └── shared/                 # 도메인과 무관한 공통 코드
     ├── components/         # layout, ui, icons
     ├── config/             # 사이트 설정, 환경 변수
-    ├── hooks/
-    └── lib/                # supabase client, query client, utils
+    ├── hooks/              # 디바운스, 스와이프, 동작 줄이기 감지
+    └── lib/                # supabase client + 생성된 DB 타입, query client, utils
 
 supabase/
 ├── migrations/             # 테이블, 인덱스, RLS 정책
@@ -76,10 +78,14 @@ Supabase SQL Editor 에서 `supabase/migrations/*.sql`, `supabase/seed.sql` 순�
 | `npm run lint` | ESLint |
 | `npm run typecheck` | 타입 검사 |
 | `npm test` | 단위 테스트 (Vitest) |
-| `npm run test:e2e` | E2E 테스트 (Playwright, Supabase 응답은 시드 데이터로 모킹) |
+| `npm run test:e2e` | E2E 테스트 (Playwright, Supabase 응답은 시드 데이터로 모킹. 처음 한 번 `npx playwright install chromium`) |
 | `npm run db:types` | Supabase 스키마로 DB 타입 재생성 (`SUPABASE_PROJECT_ID` 필요) |
 
 ## 브랜치 / 커밋 규칙
 
 - `dev` 에서 작업하고 단위별로 `main` 에 머지, `main` 은 Vercel 로 자동 배포
-- 커밋 메시지: `feat`, `fix`, `style`, `docs`, `chore` 타입 + 한국어 요약
+- 커밋 메시지: `feat`, `fix`, `refactor`, `style`, `test`, `docs`, `chore` 타입 + 한국어 요약
+
+## CI
+
+GitHub Actions 에서 `dev`/`main` 푸시와 PR 마다 lint, 타입 검사, 단위 테스트, E2E 테스트를 실행합니다. 배포는 Vercel 이 `main` 기준으로 자동 진행합니다.

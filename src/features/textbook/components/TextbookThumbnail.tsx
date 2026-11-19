@@ -33,7 +33,7 @@ export function TextbookThumbnail({ src, alt, preload = false }: TextbookThumbna
       preload={preload}
       sizes="(min-width: 1024px) 250px, (min-width: 640px) 33vw, 50vw"
       onError={() => setFailedSrc(src)}
-      className="object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+      className="object-contain"
     />
   );
 }

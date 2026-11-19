@@ -10,7 +10,7 @@ type TextbookCardProps = {
 
 export function TextbookCard({ textbook, preloadImage }: TextbookCardProps) {
   return (
-    <article className="group min-w-0">
+    <article className="min-w-0">
       <div className="relative aspect-[250/318] overflow-hidden rounded border border-gray-200 bg-white">
         <TextbookThumbnail src={textbook.thumbnailUrl} alt={textbook.title} preload={preloadImage} />
       </div>

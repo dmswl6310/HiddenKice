@@ -12,7 +12,7 @@
 | 스타일 | Tailwind CSS v4, Pretendard |
 | 데이터 | Supabase (PostgreSQL, RLS), supabase-js |
 | 서버 상태 관리 | TanStack Query v5 |
-| 테스트 | Vitest |
+| 테스트 | Vitest (단위), Playwright (E2E) |
 | 배포 | Vercel |
 
 ## 주요 기능
@@ -51,6 +51,8 @@ src/
 supabase/
 ├── migrations/             # 테이블, 인덱스, RLS 정책
 └── seed.sql                # 더미 데이터
+
+e2e/                        # Playwright E2E (seed.sql 데이터로 Supabase 응답 모킹)
 ```
 
 - 새 기능은 `features/<기능명>` 을 같은 형태로 추가하면 되고, 기존 코드는 수정하지 않아도 됩니다.
@@ -74,6 +76,7 @@ Supabase SQL Editor 에서 `supabase/migrations/*.sql`, `supabase/seed.sql` 순�
 | `npm run lint` | ESLint |
 | `npm run typecheck` | 타입 검사 |
 | `npm test` | 단위 테스트 (Vitest) |
+| `npm run test:e2e` | E2E 테스트 (Playwright, Supabase 응답은 시드 데이터로 모킹) |
 | `npm run db:types` | Supabase 스키마로 DB 타입 재생성 (`SUPABASE_PROJECT_ID` 필요) |
 
 ## 브랜치 / 커밋 규칙

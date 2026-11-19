@@ -44,3 +44,9 @@ next-env.d.ts
 
 # AI 에이전트 안내 파일 (next dev 실행 시 자동 생성)
 AGENTS.md
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

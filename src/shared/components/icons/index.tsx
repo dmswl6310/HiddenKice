@@ -128,3 +128,19 @@ export function ImageOffIcon(props: IconProps) {
     </BaseIcon>
   );
 }
+
+export function PauseIcon(props: IconProps) {
+  return (
+    <BaseIcon {...props}>
+      <path d="M9 6v12M15 6v12" />
+    </BaseIcon>
+  );
+}
+
+export function PlayIcon(props: IconProps) {
+  return (
+    <BaseIcon {...props}>
+      <path d="M8 5.5v13l10-6.5-10-6.5Z" fill="currentColor" />
+    </BaseIcon>
+  );
+}

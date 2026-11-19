@@ -14,7 +14,10 @@ type UseAutoSlideOptions = {
  */
 export function useAutoSlide({ length, intervalMs = 5000 }: UseAutoSlideOptions) {
   const [index, setIndex] = useState(0);
+  /** hover / focus 로 인한 일시 정지 */
   const [paused, setPaused] = useState(false);
+  /** 사용자가 정지 버튼으로 멈춘 상태 (hover 가 끝나도 유지) */
+  const [stopped, setStopped] = useState(false);
   const reducedMotion = usePrefersReducedMotion();
   const canSlide = length > 1;
 
@@ -33,13 +36,13 @@ export function useAutoSlide({ length, intervalMs = 5000 }: UseAutoSlideOptions)
 
   // index가 바뀌면(스와이프 등 수동 전환 포함) 타이머를 처음부터 다시 시작한다.
   useEffect(() => {
-    if (!canSlide || paused || reducedMotion) return;
+    if (!canSlide || paused || stopped || reducedMotion) return;
 
     const timer = window.setInterval(() => {
       if (document.visibilityState === "visible") next();
     }, intervalMs);
     return () => window.clearInterval(timer);
-  }, [canSlide, paused, reducedMotion, intervalMs, next, index]);
+  }, [canSlide, paused, stopped, reducedMotion, intervalMs, next, index]);
 
   return {
     index: length > 0 ? Math.min(index, length - 1) : 0,
@@ -48,5 +51,8 @@ export function useAutoSlide({ length, intervalMs = 5000 }: UseAutoSlideOptions)
     prev,
     pause: () => setPaused(true),
     resume: () => setPaused(false),
+    /** 자동 재생 켜짐 여부 (정지 버튼 표시용) */
+    playing: canSlide && !stopped && !reducedMotion,
+    togglePlaying: () => setStopped((value) => !value),
   };
 }

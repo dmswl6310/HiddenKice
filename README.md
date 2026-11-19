@@ -3,7 +3,6 @@
 히든카이스 교재 스토어 메인 화면입니다. 교재 정보는 Supabase 에 저장하고, 브라우저에서 직접 조회(CSR)해 보여줍니다.
 
 - **배포**: https://hidden-kice-shop.vercel.app
-- **저장소**: https://github.com/dmswl6310/HiddenKice
 
 ## 기술 스택
 
